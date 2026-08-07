@@ -56,8 +56,6 @@ Individual user accounts are assigned to security groups based on job responsibi
 
 Windows security auditing provides an additional layer of accountability by recording selected security and file-access activity for investigation.
 
-![Solution Architecture](architecture/truglamor-azure-architecture.png)
-
 ### Security Design Principles
 
 The implementation was based on the following principles:
@@ -73,14 +71,13 @@ The implementation was based on the following principles:
 
 This view shows how the solution supports TruGlamor's business operations and separates access according to staff responsibilities.
 
-![Business Architecture](architecture/truglamor-business-architecture.png)
+![Business Architecture](architecture/TruGlamor_Secure_Business_Infrastructure_Architecture.png)
 
 ### Technical Architecture
 
 This view shows the underlying Azure and Windows Server security implementation, including identity, role-based access control, protected business resources and security auditing.
 
 ![Technical Architecture](architecture/truglamor-technical-architecture.png)
-
 
 ---
 
