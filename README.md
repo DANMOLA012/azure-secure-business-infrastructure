@@ -44,3 +44,27 @@ NOVIX was responsible for infrastructure administration and security configurati
 - Windows Security Auditing
 - Windows Event Viewer
 - Remote Desktop Protocol (RDP)
+
+
+---
+
+## Solution Architecture
+
+The solution uses a Microsoft Azure-hosted Windows Server as the central environment for business resources.
+
+Individual user accounts are assigned to security groups based on job responsibilities. NTFS permissions are then applied to business folders to control which roles can access sensitive information.
+
+Windows security auditing provides an additional layer of accountability by recording selected security and file-access activity for investigation.
+
+![Solution Architecture](architecture/truglamor-azure-architecture.png)
+
+### Security Design Principles
+
+The implementation was based on the following principles:
+
+- **Individual accountability** – each user has a separate account rather than using shared credentials.
+- **Least privilege** – users receive only the access required for their responsibilities.
+- **Role-based access** – permissions are assigned through security groups rather than directly to individual users where possible.
+- **Separation of responsibilities** – business roles have different levels of access to Finance, HR, Inventory, Sales and other resources.
+- **Auditing** – security events and selected file-access activity are logged to support investigation.
+- **Administrative separation** – NOVIX manages the infrastructure but is not assigned to normal TruGlamor business-role groups.
