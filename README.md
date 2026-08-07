@@ -264,6 +264,78 @@ Before production deployment, additional controls would be considered, including
 
 One of the main lessons from this project was that access control and accountability are related but separate security problems.
 
+
+
+---
+
+## Lessons Learned
+
+This project gave me practical experience moving from a security design to an implemented and tested environment.
+
+### Design Before Configuration
+
+Planning the user roles, security groups and folder structure before assigning permissions made the access-control model easier to manage and troubleshoot.
+
+Using security groups rather than assigning permissions directly to individual users also made the design more scalable.
+
+### Test Security Controls
+
+Configuring a permission does not prove that it works.
+
+Testing the environment using the Owner, Manager and Bookkeeper accounts helped identify permission issues and confirm the final access-control behaviour.
+
+This reinforced the importance of validating security controls from the perspective of the user affected by them.
+
+### Logging Needs Context
+
+Enabling auditing generated a large number of Windows security events.
+
+Filtering and investigating specific events, including Event ID `4663`, demonstrated that collecting logs is only the first step. Useful monitoring also requires knowing which events are relevant and what activity should be investigated.
+
+### Administrative Privilege Requires Additional Controls
+
+The project also demonstrated the difference between normal user access and privileged administrative access.
+
+A system administrator may retain the technical ability to change permissions even when they are not assigned normal business-data access.
+
+In a production environment, privileged access should therefore be tightly controlled, monitored and used only when required.
+
+---
+
+## Future Improvements
+
+If this environment were developed further for production use, I would consider the following improvements:
+
+- **Microsoft Entra ID integration** for centralized identity management.
+- **Multi-Factor Authentication (MFA)** for administrative and remote access.
+- **Privileged Access Management** to reduce standing administrative privileges.
+- **Azure Monitor / Log Analytics** for centralized security monitoring.
+- **Microsoft Defender for Cloud** for additional cloud security visibility and recommendations.
+- **Automated backup and restore testing** to validate business continuity.
+- **Stronger network controls** to reduce unnecessary exposure of remote administration services.
+- **Client-controlled encryption/key management** where stronger separation between infrastructure administrators and business data is required.
+- **Alerting rules** for suspicious authentication, permission changes and sensitive resource access.
+
+A future phase could also introduce transaction-level business applications for sales, inventory and financial workflows. This would allow security monitoring to move beyond file access and provide greater visibility into business activity.
+
+---
+
+## Project Outcome
+
+The project resulted in a working Azure-hosted Windows Server environment with:
+
+- Individual user identities
+- Role-based security groups
+- Least-privilege NTFS permissions
+- Segregated business resources
+- Windows security auditing
+- Access-control testing
+- Security event validation
+
+The project demonstrated how cloud infrastructure, identity management, access control and auditing can be combined to create a more controlled and accountable environment for a small business.
+
+More importantly, testing highlighted where infrastructure security controls end and where additional identity, monitoring, cryptographic and business-process controls would be required in a production environment.
+
 RBAC and NTFS permissions determine **who should be allowed to access a resource**, while auditing helps determine **what activity occurred**.
 
 Neither control alone can guarantee that an authorized user will use legitimate access appropriately.
