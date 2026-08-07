@@ -210,3 +210,62 @@ The testing demonstrated that:
 - Event Viewer could be used to investigate access to protected resources.
 
 The implementation therefore provided both preventative access controls and detective controls for the test environment.
+
+
+
+---
+
+## Security Findings and Limitations
+
+Testing the environment highlighted several important security considerations.
+
+### 1. Privileged Administrator Access
+
+The business users were successfully restricted according to their assigned roles. However, Windows local administrators retain privileged control over the operating system.
+
+Although the NOVIX administrative account was not assigned to TruGlamor business-role groups, an administrator can potentially modify NTFS permissions, take ownership of files, or perform other privileged actions when required for system administration.
+
+This means that NTFS permissions provide effective separation between normal business users, but they should not be treated as a mechanism for completely isolating data from a privileged system administrator.
+
+For this implementation, NOVIX administrative access is treated as infrastructure administration rather than routine authorization to access business information.
+
+A production environment requiring stronger separation could introduce additional privileged-access controls and client-controlled encryption or key management.
+
+### 2. Auditing Provides Evidence, Not Prevention
+
+Windows security auditing improves visibility by recording selected user and system activity.
+
+However, logging does not prevent an authorized user from intentionally misusing legitimate access.
+
+For example, if a user is authorized to modify a financial document, Windows permissions cannot determine whether the business information entered into that document is accurate or fraudulent.
+
+This project therefore provides access control and technical accountability rather than a complete fraud-prevention system.
+
+### 3. Business Activity Outside the Server
+
+The environment can monitor activity that occurs within the configured Windows infrastructure, but it cannot independently detect physical events such as:
+
+- Unrecorded cash transactions
+- Physical inventory theft
+- Staff collusion
+- Transactions performed outside approved systems
+
+Addressing these risks would require additional business controls and transactional applications.
+
+### 4. Proof-of-Concept Scope
+
+The environment was built as a controlled implementation to demonstrate cloud infrastructure security, role-based access control and auditing.
+
+Before production deployment, additional controls would be considered, including stronger identity protection, centralized monitoring, backup and recovery testing, privileged-access management and enhanced network security.
+
+---
+
+## Key Security Takeaway
+
+One of the main lessons from this project was that access control and accountability are related but separate security problems.
+
+RBAC and NTFS permissions determine **who should be allowed to access a resource**, while auditing helps determine **what activity occurred**.
+
+Neither control alone can guarantee that an authorized user will use legitimate access appropriately.
+
+Effective security therefore requires a combination of preventative controls, detective controls and appropriate business processes.
