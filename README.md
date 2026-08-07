@@ -149,3 +149,64 @@ For example:
 Permissions were assigned primarily through security groups rather than directly to individual user accounts.
 
 This made the access-control model easier to understand, test and maintain.
+
+
+---
+
+## Security Testing and Validation
+
+After configuring the environment, I tested the access-control model using the different user accounts to confirm that the permissions worked as intended.
+
+### Access Control Testing
+
+Testing was performed by signing in with different business accounts and attempting to access resources inside the `C:\Business` workspace.
+
+The tests confirmed that users could access resources required for their roles while restricted resources remained inaccessible.
+
+One example was the Manager account attempting to access the Finance folder. The account was denied access because Finance was outside the permissions assigned to the Manager role.
+
+This helped verify that the NTFS permissions and security-group memberships were enforcing the intended access-control model.
+
+### Security Auditing
+
+Windows security auditing was configured to provide visibility into security-related activity.
+
+The following audit categories were enabled for both successful and failed events:
+
+- Account Management
+- Logon Events
+- Object Access
+- Policy Change
+- System Events
+
+Folder-level auditing was also configured on selected business resources to record relevant access activity.
+
+### Event Log Validation
+
+I used Windows Event Viewer to review the Security log after generating file-access activity.
+
+Event ID `4663` was used during validation to identify attempts to access objects within the monitored business folders.
+
+The event information provided useful details such as:
+
+- User/account involved
+- Object or file accessed
+- Type of access requested
+- Process associated with the activity
+- Timestamp of the event
+
+This demonstrated that access controls could be combined with security auditing to provide both **restriction and traceability**.
+
+---
+
+## Validation Result
+
+The testing demonstrated that:
+
+- Role-based permissions were being enforced.
+- Unauthorized folder access could be denied.
+- Authorized users retained access to resources required for their roles.
+- Security events were generated during monitored file activity.
+- Event Viewer could be used to investigate access to protected resources.
+
+The implementation therefore provided both preventative access controls and detective controls for the test environment.
