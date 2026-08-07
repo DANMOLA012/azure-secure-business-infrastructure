@@ -78,7 +78,6 @@ This view shows how the solution supports TruGlamor's business operations and se
 This view shows the underlying Azure and Windows Server security implementation, including identity, role-based access control, protected business resources and security auditing.
 
 ![Technical Architecture](architecture/truglamor-technical-architecture.png)
-
 ---
 
 ## Technical Implementation
