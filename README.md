@@ -69,6 +69,18 @@ The implementation was based on the following principles:
 - **Auditing** – security events and selected file-access activity are logged to support investigation.
 - **Administrative separation** – NOVIX manages the infrastructure but is not assigned to normal TruGlamor business-role groups.
 
+### Business Architecture
+
+This view shows how the solution supports TruGlamor's business operations and separates access according to staff responsibilities.
+
+![Business Architecture](architecture/truglamor-business-architecture.png)
+
+### Technical Architecture
+
+This view shows the underlying Azure and Windows Server security implementation, including identity, role-based access control, protected business resources and security auditing.
+
+![Technical Architecture](architecture/truglamor-technical-architecture.png)
+
 
 ---
 
