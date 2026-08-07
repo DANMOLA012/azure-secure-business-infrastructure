@@ -88,7 +88,7 @@ This view shows the underlying Azure and Windows Server security implementation,
 
 ### 1. Azure Infrastructure
 
-I deployed a Windows Server 2025 Datacenter virtual machine in Microsoft Azure to provide the central environment for the project.
+I deployed a Windows Server 2025 Datacenter virtual machine in Microsofft Azure to provide the central environment for the project.
 
 The server was configured as:
 
@@ -161,6 +161,58 @@ For example:
 Permissions were assigned primarily through security groups rather than directly to individual user accounts.
 
 This made the access-control model easier to understand, test and maintain.
+
+---
+
+## Implementation Evidence
+
+The following screenshots were captured during configuration and testing of the environment. Sensitive cloud identifiers have been removed before publication.
+
+### Azure Infrastructure
+
+The project environment was deployed on Microsoft Azure using a Windows Server virtual machine.
+
+![Azure VM](evidence/azure_overview_redacted.png)
+
+### Identity and Access Management
+
+Individual Windows accounts and security groups were created to separate access according to business responsibilities.
+
+![Windows User Accounts](evidence/users.png)
+
+![Security Groups](evidence/groups.png)
+
+The following screenshot demonstrates user membership within the appropriate role-based security group.
+
+![Group Membership](evidence/membership.png)
+
+### Business Workspace
+
+Business resources were separated into dedicated folders so that permissions could be applied according to operational responsibilities.
+
+![Business Folder Structure](evidence/folders.png)
+
+### Access Control Validation
+
+Role-based permissions were tested using different user accounts. Unauthorized access to protected resources was denied as expected.
+
+![Access Denied Test](evidence/denied.png)
+
+### Security Auditing
+
+Windows security auditing was configured to record relevant security and object-access activity.
+
+![Windows Audit Policy](evidence/auditpolicy.png)
+
+Folder-level auditing was also configured for sensitive business resources.
+
+![Finance Folder Auditing](evidence/financeaudit.png)
+
+### Event Log Investigation
+
+Windows Event Viewer was used to validate the audit configuration. Event ID `4663` provided evidence of monitored object-access activity.
+
+![Event Viewer - Event 4663](evidence/event.png)
 
 
 ---
